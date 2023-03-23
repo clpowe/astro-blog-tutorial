@@ -281,7 +281,7 @@ button {
 		user-select: none;
 	}
 
-	& (svg) {
+	& svg {
 		height: var(--fs-md);
 		width: var(--fs-md);
 	}
@@ -304,8 +304,8 @@ button {
 		border-color: var(--type);
 	}
 
-	&[aria-current='page'] {
-		--type: hsl(var(--accent));
+	& [aria-current='page'] {
+		color: hsl(var(--accent));
 	}
 
 	&:hover {
