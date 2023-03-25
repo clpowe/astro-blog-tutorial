@@ -1,11 +1,14 @@
 ---
+import { Post } from '../types/types'
+
 // component import
 import PostHeader from '../components/PostHeader.astro'
 import MainLayout from './MainLayout.astro'
 
 const { frontmatter } = Astro.props
 
-const { title, description, date, category, author, image } = frontmatter
+const { title, description, date, category, author, image } =
+	frontmatter as Post
 ---
 
 <MainLayout {title} {description}>
