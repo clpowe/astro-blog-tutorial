@@ -4,6 +4,7 @@ import { Post } from '../types/types'
 // component import
 import PostHeader from '../components/PostHeader.astro'
 import MainLayout from './MainLayout.astro'
+import CategoryCloud from '../components/CategoryCloud.astro'
 
 const { frontmatter } = Astro.props
 
@@ -17,6 +18,10 @@ const { title, description, date, category, author, image } =
 		<div class='content'>
 			<slot />
 		</div>
-		<div class='sidebar'></div>
+		<div class='sidebar'>
+			<aside class='container' aria-label='Blog Categories'>
+				<CategoryCloud showCount={false} />
+			</aside>
+		</div>
 	</div>
 </MainLayout>
