@@ -5,11 +5,24 @@ import { Post } from '../types/types'
 import PostHeader from '../components/PostHeader.astro'
 import MainLayout from './MainLayout.astro'
 import CategoryCloud from '../components/CategoryCloud.astro'
+import RelatedPosts from '../components/RelatedPosts.astro'
+
+// utils
+import { formatBlogPost } from '../js/utils'
 
 const { frontmatter } = Astro.props
-
 const { title, description, date, category, author, image } =
 	frontmatter as Post
+
+const allPosts = await Astro.glob('../pages/blog/*.md')
+const formattedPost = formatBlogPost(allPosts, { sortByDate: false })
+
+const relatedPosts = formattedPost
+	.filter(
+		(post) =>
+			post.frontmatter.category === category && post.frontmatter.title !== title
+	)
+	.slice(0, 3)
 ---
 
 <MainLayout {title} {description}>
@@ -22,6 +35,14 @@ const { title, description, date, category, author, image } =
 			<aside class='container' aria-label='Blog Categories'>
 				<CategoryCloud showCount={false} />
 			</aside>
+			{
+				relatedPosts.length > 0 && (
+					<aside class='container' aria-label='Related posts'>
+						<h2 class='h3'>Related Posts</h2>
+						<RelatedPosts {relatedPosts} />
+					</aside>
+				)
+			}
 		</div>
 	</div>
 </MainLayout>
