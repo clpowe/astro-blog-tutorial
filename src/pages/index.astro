@@ -9,7 +9,7 @@ import { formatBlogPost } from '../js/utils'
 import Link from '../components/Link.astro'
 
 const allPosts = await Astro.glob('../pages/blog/*.md')
-const formatPost = formatBlogPost(allPosts, { limit: 3 })
+const formattedPost = formatBlogPost(allPosts, { limit: 3 })
 ---
 
 <MainLayout title='My Blog' description='My astro Blog'>
@@ -36,7 +36,7 @@ const formatPost = formatBlogPost(allPosts, { limit: 3 })
 	<section class='container' aria-label='New Blog Posts'>
 		<h2 class='h1'>New Blog Posts</h2>
 		{
-			formatPost.map((post) => (
+			formattedPost.map((post) => (
 				<PostCard frontmatter={post.frontmatter} url={post.url} tagType='h3' />
 			))
 		}
